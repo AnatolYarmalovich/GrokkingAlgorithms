@@ -59,16 +59,15 @@ func findSmallest(array: [Int]) -> Int {
 }
 
 //Part two - selection sort algorithm
-func selectionSort(array: [Int]) -> [Int] {
+func selectionSort(array: inout [Int]) -> [Int] {
     var sortedArray = [Int]()
-    var tempArray = array
 
     for _ in array {
-        let smallest = findSmallest(array: tempArray)
-        sortedArray.append(tempArray.remove(at: smallest))
+        let smallest = findSmallest(array: array)
+        sortedArray.append(array.remove(at: smallest))
     }
     return sortedArray
 }
 
-let selectionSortResult = selectionSort(array: unsortedMockArray)
+let selectionSortResult = selectionSort(array: &unsortedMockArray)
 print("Selection sort result: \(selectionSortResult)")
