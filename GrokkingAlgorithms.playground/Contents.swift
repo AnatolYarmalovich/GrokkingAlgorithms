@@ -71,3 +71,75 @@ func selectionSort(array: inout [Int]) -> [Int] {
 
 let selectionSortResult = selectionSort(array: &unsortedMockArray)
 print("Selection sort result: \(selectionSortResult)")
+
+/// Chapter 4
+//Recursion
+var firstRecursiveMockArray: [Int] = [4, 2, 5, 7, 1, 34, 21, 9]
+
+let testByCycle = firstRecursiveMockArray.reduce(.zero, +)
+
+//4.1
+func recursiveSum(arr: inout [Int]) -> Int {
+    if arr.isEmpty {
+        print("Stopping Condition")
+        return 0
+    }
+    print("Recursion Condition")
+    let value = arr[0]
+    arr.removeFirst()
+    print("Array: \(arr)")
+    return value + recursiveSum(arr: &arr)
+}
+
+let sum = recursiveSum(arr: &firstRecursiveMockArray)
+print("Is method correct: \(sum == testByCycle)")
+
+//4.2
+var secondRecursiveMockArray: [Int] = [4, 2, 5, 7, 1, 34, 21, 9]
+
+func calculateElementCount(arr: [Int]) -> Int {
+    if arr.isEmpty {
+        print("Stopping Condition")
+        return 0
+    }
+    print("Recursion Condition")
+    var tempArray = arr
+    tempArray.removeFirst()
+    return ( 1 + calculateElementCount(arr: tempArray))
+}
+
+let countOfElement = calculateElementCount(arr: secondRecursiveMockArray)
+print("Is method correct: \(countOfElement == secondRecursiveMockArray.count)")
+
+//4.3
+func findBiggestValueIn(arr: [Int]) -> Int? {
+    if arr.isEmpty {
+        print("Stopping Condition")
+        return nil
+    }
+    print("Recursion Condition")
+
+    var tempArray = arr
+    tempArray.removeFirst()
+
+    let value = findBiggestValueIn(arr: tempArray)
+
+    if value == nil {
+        return arr[0]
+    }
+
+    if arr[0] < value! {
+        return value!
+    } else {
+        return arr[0]
+    }
+}
+let biggestValue = findBiggestValueIn(arr: secondRecursiveMockArray)
+let biggestValueToConsole = biggestValue == nil
+? "Biggest value not found"
+: "Biggest value: \(biggestValue!)"
+print(biggestValueToConsole)
+
+//Quick sort
+
+
