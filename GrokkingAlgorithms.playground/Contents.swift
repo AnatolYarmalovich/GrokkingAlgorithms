@@ -141,5 +141,28 @@ let biggestValueToConsole = biggestValue == nil
 print(biggestValueToConsole)
 
 //Quick sort
+func quickSort(arr: [Int]) -> [Int] {
+    if arr.count < 2 {
+        print("Stopping Condition")
+        return arr
+    }
 
+    print("Recursion Condition")
+    let pivot: Int = arr[0]
+
+    var less = [Int]()
+    var greater = [Int]()
+
+    for i in 1..<arr.count {
+        if arr[i] <= pivot {
+            less.append(arr[i])
+        } else {
+            greater.append(arr[i])
+        }
+    }
+    return quickSort(arr: less) + [pivot] + quickSort(arr: greater)
+}
+
+let quickSortResult = quickSort(arr: secondRecursiveMockArray)
+print("Quicksort result: \(quickSortResult)")
 
