@@ -164,5 +164,20 @@ func quickSort(arr: [Int]) -> [Int] {
 }
 
 let quickSortResult = quickSort(arr: secondRecursiveMockArray)
-print("Quicksort result: \(quickSortResult)")
+print("Quick sort result: \(quickSortResult)")
 
+//Insertion sort
+func insertionSort(arr: [Int]) -> [Int] {
+    var tempArray = arr
+    for i in 0..<tempArray.count {
+        var j = i
+        while j > 0 && tempArray[j] < tempArray[j - 1] {
+            tempArray.swapAt(j, j - 1)
+            j = j - 1
+        }
+    }
+    return tempArray
+}
+
+let insertionSortResult = insertionSort(arr: secondRecursiveMockArray)
+print("Insertion sort result: \(insertionSortResult)")
