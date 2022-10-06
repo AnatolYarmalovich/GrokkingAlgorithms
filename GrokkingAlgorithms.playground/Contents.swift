@@ -1,4 +1,6 @@
-import UIKit
+import Foundation
+import DequeModule
+import Collections
 
 //Grokking Algorithms by Aditya Y. Bhargava
 //Swift algorithms version by Yarmalovich Anatol
@@ -181,3 +183,49 @@ func insertionSort(arr: [Int]) -> [Int] {
 
 let insertionSortResult = insertionSort(arr: secondRecursiveMockArray)
 print("Insertion sort result: \(insertionSortResult)")
+
+//BFS
+var graph = Dictionary<AnyHashable, [String]>()
+graph["antoly"] = ["alice", "bob", "claire"]
+graph["bob"] = ["anuj", "peggy"]
+graph["alice"] = ["peggy"]
+graph["claire"] = ["thom", "jonny"]
+graph["anuj"] = []
+graph["peggy"] = []
+graph["thom"] = []
+graph["jonny"] = []
+
+func searchSellerIn() -> Bool {
+    var searchQueue = Deque<String>()
+
+    searchQueue.append(contentsOf: graph["antoly"]!)
+
+    var searched: [String] = []
+
+    while !searchQueue.isEmpty {
+        if let person = searchQueue.popFirst() {
+            if !searched.contains(where: { $0 == person }) {
+                if personIsSeller(person) {
+                    print("Searched: \(searched)")
+                    print("Seller name: \(person)")
+                    return true
+                } else {
+                    searchQueue.append(contentsOf: graph[person]!)
+                    searched.append(person)
+                }
+            }
+        }
+    }
+
+    print("Searched: \(searched)")
+
+    return false
+}
+
+func personIsSeller(_ name: String) -> Bool {
+    //thom is seller
+    return name == "thom"
+}
+
+let isThereAMangoSellerHere: Bool = searchSellerIn()
+print(isThereAMangoSellerHere)
